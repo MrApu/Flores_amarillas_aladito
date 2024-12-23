@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Navidad!</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+            overflow: hidden;
+        }
+
+        .scene {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .snow-ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 30%;
+            background: white;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .couple {
+            position: absolute;
+            bottom: 30%;
+            left: 30%;
+            transform: translateX(-50%) scaleX(-1); /* Voltea los personajes */
+            display: flex;
+            gap: 20px;
+        }
+
+        .person {
+            width: 60px;
+            height: 120px;
+            position: relative;
+            animation: walk 2s infinite;
+        }
+
+        .boy {
+            background: linear-gradient(to bottom,
+                #808080 0%, #808080 50%,    /* Casaca ploma */
+                #000000 50%, #000000 100%   /* Pantalón negro */
+            );
+        }
+
+        .girl {
+            background: linear-gradient(to bottom,
+                #000000 0%, #000000 50%,    /* Casaca negra */
+                #C4A484 50%, #C4A484 100%   /* Pantalón café baileys */
+            );
+        }
+
+        .head {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: #FFE4C4;
+            border-radius: 50%;
+        }
+
+        /* Gorros navideños */
+        .head::before {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 30px solid #e74c3c;  /* Color rojo del gorro */
+        }
+
+        /* Pompón del gorro */
+        .head::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .snowflake {
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes walk {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .message {
+            position: absolute;
+            top: 10%;
+            white-space: nowrap;
+            color: white;
+            font-size: 1.8em;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4;
+            animation: moveRightLeft 50s ease-in-out infinite;
+            width: max-content;
+        }
+
+        @keyframes moveRightLeft {
+            0% {
+                transform: translateX(100vw) scale(0.8);
+                opacity: 0;
+            }
+            5% {
+                transform: translateX(90vw) scale(1);
+                opacity: 1;
+            }
+            70% {
+                transform: translateX(-100%) scale(1);
+                opacity: 1;
+            }
+            75%, 90% {
+                transform: translateX(-100%) scale(1);
+                opacity: 1;
+            }
+            95% {
+                transform: translateX(-100%) scale(0.8);
+                opacity: 0;
+            }
+            96%, 100% {
+                transform: translateX(100vw) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073;
+            }
+            50% {
+                text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6;
+            }
+        }
+
+        /* Real Plaza edificio */
+        .real-plaza {
+            position: absolute;
+            bottom: 30%;
+            right: 10%;
+            width: 300px;
+            height: 250px;
+            background: linear-gradient(180deg, #2C3E50 0%, #34495E 100%);
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+
+        /* Logo Real Plaza */
+        .real-plaza::before {
+            content: 'REAL PLAZA';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #FFD700;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+            font-family: Arial, sans-serif;
+        }
+
+        /* Ventanas */
+        .windows {
+            position: absolute;
+            top: 70px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .window {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            animation: windowGlow 3s infinite alternate;
+        }
+
+        @keyframes windowGlow {
+            from { background: rgba(255, 255, 255, 0.9); }
+            to { background: rgba(255, 255, 0, 0.7); }
+        }
+
+        /* Entrada */
+        .entrance {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 100px;
+            background: rgba(44, 62, 80, 0.9);
+            border-radius: 10px 10px 0 0;
+        }
+
+        /* Decoración navideña del edificio */
+        .christmas-lights {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .christmas-light {
+            width: 8px;
+            height: 8px;
+            background: #f00;
+            border-radius: 50%;
+            animation: christmasGlow 1s infinite alternate;
+        }
+
+        .christmas-light:nth-child(2n) { background: #0f0; }
+        .christmas-light:nth-child(3n) { background: #00f; }
+
+        @keyframes christmasGlow {
+            from { opacity: 0.5; transform: scale(1); }
+            to { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Estilos para el control de audio */
+        .audio-container {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            width: 200px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .audio-container audio {
+            width: 100%;
+            height: 30px;
+        }
+
+        /* Personalizando la barra de reproducción */
+        .audio-container audio::-webkit-media-controls-panel {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .audio-container audio::-webkit-media-controls-current-time-display,
+        .audio-container audio::-webkit-media-controls-time-remaining-display {
+            color: #333;
+        }
+
+        @keyframes christmasColors {
+            0% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
+            50% { color: #00ff00; text-shadow: 0 0 5px #00ff00; }
+            100% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
+        }
+        .christmas-message {
+            text-align: center;
+            margin: 10px;
+            font-family: 'Arial', sans-serif;
+            padding: 10px;
+            background: linear-gradient(45deg, rgba(139, 0, 0, 0.7), rgba(0, 100, 0, 0.7));
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.2em;
+            animation: christmasColors 3s infinite;
+            border: 2px solid gold;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Estilos para decoraciones navideñas */
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes float-cloud {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+
+        .cloud {
+            position: fixed;
+            background: #fff;
+            border-radius: 50px;
+            width: 150px;
+            height: 45px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.8);
+            animation: float-cloud linear infinite;
+            opacity: 0.9;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .cloud::before {
+            width: 70px;
+            height: 70px;
+            top: -30px;
+            left: 20px;
+        }
+
+        .cloud::after {
+            width: 50px;
+            height: 50px;
+            top: -20px;
+            right: 20px;
+        }
+
+        .cloud:nth-child(1) { 
+            top: 15%; 
+            left: 10%; 
+            animation-duration: 60s;
+            animation-delay: -15s;
+        }
+        .cloud:nth-child(2) { 
+            top: 25%; 
+            left: 40%; 
+            animation-duration: 75s;
+            animation-delay: -45s;
+        }
+        .cloud:nth-child(3) { 
+            top: 10%; 
+            left: 70%; 
+            animation-duration: 65s;
+            animation-delay: -30s;
+        }
+        .cloud:nth-child(4) { 
+            top: 30%; 
+            left: 85%; 
+            animation-duration: 70s;
+            animation-delay: 0s;
+        }
+
+        .street {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 150px;
+            background: #555;
+            perspective: 500px;
+            transform-style: preserve-3d;
+        }
+
+        .street::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(90deg, 
+                #fff 0, #fff 5%, 
+                #555 5%, #555 45%, 
+                #fff 45%, #fff 55%, 
+                #555 55%, #555 95%,
+                #fff 95%, #fff 100%);
+            opacity: 0.3;
+        }
+
+        .lamppost {
+            position: absolute;
+            bottom: 0;
+            width: 12px;
+            height: 180px;
+            background: linear-gradient(to right, #333, #666, #333);
+            border-radius: 6px;
+        }
+
+        .lamppost::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ddd;
+            box-shadow: 0 0 15px rgba(255,255,255,0.8);
+        }
+
+        .lamppost-lights {
+            position: absolute;
+            width: 4px;
+            height: 150px;
+            top: 20px;
+            left: 4px;
+            background: repeating-linear-gradient(to bottom,
+                #ff0000 0px, #ff0000 10px,
+                #00ff00 10px, #00ff00 20px,
+                #ffff00 20px, #ffff00 30px);
+            animation: twinkle-lights 1s infinite;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        @keyframes twinkle-lights {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .lamppost:nth-child(1) { left: 10%; }
+        .lamppost:nth-child(2) { left: 30%; }
+        .lamppost:nth-child(3) { left: 50%; }
+        .lamppost:nth-child(4) { left: 70%; }
+        .lamppost:nth-child(5) { left: 90%; }
+
+        .christmas-garland {
+            position: absolute;
+            width: 100%;
+            height: 30px;
+            bottom: 120px;
+            background: repeating-linear-gradient(45deg,
+                #ff0000 0px, #ff0000 20px,
+                #00ff00 20px, #00ff00 40px,
+                #ffff00 40px, #ffff00 60px);
+            opacity: 0.8;
+            box-shadow: 0 0 15px rgba(255,255,255,0.7);
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="street">
+        <div class="lamppost">
+            <div class="lamppost-lights"></div>
+        </div>
+        <div class="lamppost">
+            <div class="lamppost-lights"></div>
+        </div>
+        <div class="lamppost">
+            <div class="lamppost-lights"></div>
+        </div>
+        <div class="lamppost">
+            <div class="lamppost-lights"></div>
+        </div>
+        <div class="lamppost">
+            <div class="lamppost-lights"></div>
+        </div>
+        <div class="christmas-garland"></div>
+    </div>
+    <div class="scene">
+        <div class="message">¡Aladitooooo quiero  que sepas que fue algo muy bonito volver a verte. Me hubiese gustado estar mas tiempo contigo pero ni tu ni yo podiamos.
+            Con este detalle quiero que sepas que te quiero mucho y cuanto vales para mi. Gracias por brindarme tu apoyo en los momentos mas dificiles. Gracias por ser la persona que eres!
+        No cambies ¡Feliz navidad!</div>
+        <div class="couple">
+            <div class="person boy">
+                <div class="head"></div>
+            </div>
+            <div class="person girl">
+                <div class="head"></div>
+            </div>
+        </div>
+        <div class="real-plaza">
+            <div class="windows">
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+            </div>
+            <div class="entrance"></div>
+            <div class="christmas-lights">
+                <div class="christmas-light"></div>
+                <div class="christmas-light"></div>
+                <div class="christmas-light"></div>
+                <div class="christmas-light"></div>
+                <div class="christmas-light"></div>
+            </div>
+        </div>
+        <div class="snow-ground"></div>
+        <div class="audio-container">
+            <div class="christmas-message">
+                Presiona para que cante aladito
+            </div>
+            <audio controls autoplay loop>
+                <source src="sound/feliz navidad aladito.mp3" type="audio/mpeg">
+                <source src="sound/feliz navidad aladito.ogg" type="audio/ogg">
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        function createSnowflakes() {
+            const snowflakes = ['❅', '❆', '❄'];
+            for(let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                snowflake.style.opacity = Math.random();
+                snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+                document.body.appendChild(snowflake);
+            }
+        }
+        createSnowflakes();
+    </script>
+    <script>
+        // Función para manejar la reproducción automática
+        window.onload = function() {
+            const audio = document.querySelector('.audio-container audio');
+            
+            // Intenta reproducir cuando se carga la página
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    audio.muted = false;  // Quita el mute una vez que comienza a reproducirse
+                })
+                .catch(error => {
+                    // Auto-play fue prevenido
+                    console.log("Reproducción automática prevenida");
+                });
+            }
+
+            // Intenta reproducir en el primer clic del usuario
+            document.addEventListener('click', function() {
+                audio.muted = false;
+                audio.play();
+            }, { once: true });
+        };
+    </script>
+</body>
+</html>
