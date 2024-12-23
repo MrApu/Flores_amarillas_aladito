@@ -8,8 +8,65 @@
     <link rel="stylesheet" href="css/snow.css" />
     <link rel="icon" href="img/flowers.png" type="image/x-icon" />
     <title>Flower</title>
+    <style>
+      .christmas-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        font-size: 1.1em;
+        background: linear-gradient(45deg, #ff0000, #ff6b6b);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 1000;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+      }
+
+      .christmas-button:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 6px 20px rgba(255,0,0,0.3);
+        background: linear-gradient(45deg, #ff1a1a, #ff8080);
+      }
+
+      .christmas-button .tree {
+        display: inline-block;
+        font-size: 1.4em;
+        animation: swing 2s ease-in-out infinite;
+      }
+
+      @keyframes swing {
+        0%, 100% { transform: rotate(-5deg); }
+        50% { transform: rotate(5deg); }
+      }
+
+      @media (max-width: 600px) {
+        .christmas-button {
+          top: auto;
+          bottom: 20px;
+          right: 50%;
+          transform: translateX(50%);
+          font-size: 1em;
+          padding: 10px 16px;
+        }
+        
+        .christmas-button:hover {
+          transform: translateX(50%) translateY(-3px) scale(1.05);
+        }
+      }
+    </style>
   </head>
   <body class="container">
+    <a href="navidad.html" class="christmas-button">
+      <span class="tree">🎄</span>
+      <span>¡Navidad!</span>
+    </a>
     <div class="snowflakes" aria-hidden="true">
       <div class="snowflake">❅</div>
       <div class="snowflake">❆</div>

@@ -1,18 +1,19 @@
 .snowflake {
-  color: #fff;
-  font-size: 1em;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8em;
   font-family: Arial, sans-serif;
-  text-shadow: 0 0 5px #000;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
   position: fixed;
   top: -10%;
-  z-index: 9999;
+  z-index: -1;
   user-select: none;
   cursor: default;
   animation-name: snowflakes-fall, snowflakes-shake;
-  animation-duration: 10s, 3s;
+  animation-duration: 12s, 4s;
   animation-timing-function: linear, ease-in-out;
   animation-iteration-count: infinite, infinite;
   animation-play-state: running, running;
+  pointer-events: none;
 }
 
 @keyframes snowflakes-fall {
@@ -29,7 +30,7 @@
     transform: translateX(0);
   }
   50% {
-    transform: translateX(80px);
+    transform: translateX(50px);
   }
 }
 
