@@ -1,17 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,900&display=swap');
 *{
     font-family: 'Poppins',cursive;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 body{
     color: azure;
     width: 100%;
-    height: 82vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: black;
-    /* padding-top: -30; */
+    padding: 20px;
+    text-align: center;
 }
 
 .botones{
@@ -19,79 +23,65 @@ body{
     border-radius: 80px;
     background-color: transparent;
     border: none;
+    margin: 10px;
+    cursor: pointer;
 }
 
 .botones a{
     background-color: #0a2be9;
-    padding: 9px;
+    padding: 15px 30px;
     border-radius: 80px;
-    -webkit-border-radius: 80px;
-    -moz-border-radius: 80px;
-    -ms-border-radius: 80px;
-    -o-border-radius: 80px;
-
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
 }
 
-.botones a:focus{
+.botones a:hover {
     background-color: rgb(50, 194, 194);
+    transform: scale(1.05);
 }
 
 .greetings{
-    font-size: 7rem;
-    font-weight: 900;
+    margin-bottom: 30px;
 }
-.greetings > span{
+
+.greetings span{
+    display: inline-block;
+    font-size: clamp(2rem, 10vw, 7rem);
+    font-weight: 900;
+    line-height: 1.2;
     animation: glow 2.5s ease-in-out infinite;
 }
+
+.description {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    margin: 20px 0 30px 0;
+    padding: 0 15px;
+}
+
 @keyframes glow{
     0%, 100%{
         color: #fff;
         text-shadow: 0 0 12px #39c6d6, 0 0 50px #39c6d6, 0 0 100px #39c6d6;
     }
     10%, 90%{
-        color: #111;
+        color: #fff;
         text-shadow: none;
     }
 }
-.greetings > span:nth-child(2){
-    animation-delay: .2s ;
-}
-.greetings > span:nth-child(3){
-    animation-delay: .4s ;
-}
-.greetings > span:nth-child(4){
-    animation-delay: .6s;
-}
-.greetings > span:nth-child(5){
-    animation-delay: .8s;
-}
-.greetings > span:nth-child(6){
-    animation-delay: 1s;
-}
 
-.description{
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-}
-
-.button a{
-    text-decoration: none;
-    font-size: 1rem;
-    color: #111;
-}
-
-@media screen and (max-width:574px){
-    .greetings{
-        display: block;
-        font-size: 4rem;
-        font-weight: 800;
-        text-align: center;
-    }
-    .description{
-        font-size: 2rem;
+/* Media queries for better mobile responsiveness */
+@media screen and (max-width: 480px) {
+    .greetings {
+        margin-bottom: 20px;
     }
     
-    .button a{
-        font-size: 1rem;
+    .description {
+        margin: 15px 0 25px 0;
+    }
+    
+    .botones a {
+        padding: 12px 25px;
     }
 }
